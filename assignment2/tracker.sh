@@ -42,5 +42,37 @@ function track {
 				echo "Found no tracker running."
 			fi
 			;;
+		'log')
+			declare -i s_time d_time
+			s_time=0
+			for line in $(cat ${LOGFILE} | sed "s/ /SUBSTITUTE/g"); do
+				#echo pre line $line
+				line=$(echo $line | sed "s/SUBSTITUTE/ /g")
+				#echo post line $line
+				case "$(echo $line | cut -d " " -f 1)" in
+					'START')
+						s_time="$(echo $line | \
+							cut -d " " -f 5 | \
+							xargs date +%s -d)"
+						;;
+					'LABEL')
+						log_label="$(echo $line | \
+							cut -d " " --complement -f 1)"
+						;;
+					'STOP')
+						d_time=$(("$(echo $line | \
+							cut -d " " -f 5 | \
+							xargs date +%s -d)" \
+							- ${s_time}))
+						echo "${log_label} : $(date +%H:%M:%S -ud @${d_time})"
+						;;
+				esac
+			done
+			
+			# A nice bonus ;)
+			if [ ${tracker_running} -eq 1 ] ; then
+				echo "${label} : $(date +%H:%M:%S -ud @$(($(date +%s) - ${s_time})))"
+			fi
+			;;
 	esac
 }
