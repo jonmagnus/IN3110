@@ -2,8 +2,6 @@
 
 declare -i tracker_running
 tracker_running=0
-timestamp=$(date "+%A %b %e %T %Z %Y")
-echo $timestamp
 
 function track {
 	option=$1
@@ -46,14 +44,3 @@ function track {
 			;;
 	esac
 }
-
-
-rm $LOGFILE
-echo "Start track"
-track 'start' 123
-echo "Stop track"
-track 'stop'
-track start
-track status
-track stop
-cat tracker.log
