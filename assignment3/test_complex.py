@@ -78,3 +78,7 @@ def test_multiply_float():
 def test_multiply_float_subtract_float():
     assert 4*Complex(2,3) - 2 == Complex(6,12), \
             'Multiplication of Complex by float and subtraction of float failed.'
+
+def test_float_subtract_complex():
+    assert 2 - Complex(2,10) == Complex(0,-10), \
+            'Subtraction of Complex by float failed.'
