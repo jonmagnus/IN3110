@@ -66,3 +66,15 @@ def test_modulus_2():
 def test_modulus_3():
     assert Complex(4,3).modulus() == 5, \
             'Modulus failed.'
+
+def test_add_complex():
+    assert Complex(2,3) + (2+2j) == Complex(4,5), \
+            'Addition with python variant of complex numbers failed.'
+
+def test_multiply_float():
+    assert 4*Complex(3,4) == Complex(12,16), \
+            'Multiplication of Complex by float failed.'
+
+def test_multiply_float_subtract_float():
+    assert 4*Complex(2,3) - 2 == Complex(6,12), \
+            'Multiplication of Complex by float and subtraction of float failed.'
