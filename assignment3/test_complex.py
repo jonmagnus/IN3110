@@ -1,3 +1,9 @@
+'''Test script for Complex class.
+
+Contains unit test for various operators on the class Complex from complex.py.
+The unit test should be self-explanatory.
+'''
+
 from complex import Complex
 from math import hypot
 
