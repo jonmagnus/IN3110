@@ -58,5 +58,5 @@ def test_modulus_2():
             'Modulus failed.'
 
 def test_modulus_3():
-    assert Complex(2,3).modulus() == 5, \
+    assert Complex(4,3).modulus() == 5, \
             'Modulus failed.'
