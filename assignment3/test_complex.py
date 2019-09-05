@@ -82,3 +82,7 @@ def test_multiply_float_subtract_float():
 def test_float_subtract_complex():
     assert 2 - Complex(2,10) == Complex(0,-10), \
             'Subtraction of Complex by float failed.'
+
+def test_eq_other():
+    assert Complex(2,3) == (2+3j), \
+            'Equality comparison with python complex failed.'
