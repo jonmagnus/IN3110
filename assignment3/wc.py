@@ -1,13 +1,10 @@
 import sys
-import glob
 
-print('argv',sys.argv[1])
-for filename in glob.glob(sys.argv[1]):
-    print('filename',filename)
+for filename in sys.argv[1:]:
     with open(filename,'r') as infile:
         a = b = c = 0
         for line in infile.readlines():
             a += 1
             b += len(line.split())
             c += len(line)
-        print(a,b,c,filename)
+        print('{:3d} {:3d} {:3d} {}'.format(a,b,c,filename))
