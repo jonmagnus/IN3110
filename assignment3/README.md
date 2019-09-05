@@ -22,7 +22,3 @@ test_complex.py .............                                                   
 
 ===================================== 13 passed in 0.05 seconds =====================================
 ```
-
-### Implement complex numbers
-
-### Make your implementation work with Python's complex numbers
