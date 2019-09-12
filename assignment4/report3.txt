@@ -1,0 +1,16 @@
+
+Running blur_1.py on the provided beatles.jpg:
+$ time python3 blur_1.py
+
+real	0m5,653s
+user	0m5,784s
+sys	0m0,188s
+
+Running blur_3.py on the same image:
+$ time python3 blur_3.py
+
+real	0m0,955s
+user	0m1,043s
+sys	0m0,230s
+
+Using numba to speed up the for-loops of blur_1.py is several times faster than the naive method, but still not as fast as numpy (see report #2).
