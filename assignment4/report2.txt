@@ -1,0 +1,15 @@
+Running blur_1.py on the provided beatles.jpg:
+$ time python3 blur_1.py
+
+real	0m5,653s
+user	0m5,784s
+sys	0m0,188s
+
+Running blur_2.py on the same image:
+$ time python3 blur_2.py
+
+real	0m0,250s
+user	0m0,313s
+sys	0m0,262s
+
+It is clear tha the numpy implementation is many times faster than the normal python version.
