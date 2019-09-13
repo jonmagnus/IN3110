@@ -24,7 +24,7 @@ def blur_image_python(image):
             for c in range(channels):
                 intensity = 0.
                 for i in range(9):
-                    intensity += image_[h + dh[i], w + dw[i], c]
+                    intensity += image_[h + dh[i] + 1, w + dw[i] + 1, c]
                 bimage[h, w, c] = intensity/9.
 
     return bimage

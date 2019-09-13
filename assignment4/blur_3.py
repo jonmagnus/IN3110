@@ -23,7 +23,7 @@ def convolve_padded_image(image, bimage):
             for c in range(channels):
                 intensity = 0.
                 for i in range(9):
-                    intensity += image[h + dh[i], w + dw[i], c]
+                    intensity += image[h + dh[i] + 1, w + dw[i] + 1, c]
                 bimage[h, w, c] = intensity/9.
 
     return bimage
