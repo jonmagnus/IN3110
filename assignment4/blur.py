@@ -41,7 +41,6 @@ if __name__ == '__main__':
 
     method = methods[method]
     image = method(image)
-    print(image.shape)
     filename = args.outfile
     if filename is None:
         filename = 'a.jpg'
