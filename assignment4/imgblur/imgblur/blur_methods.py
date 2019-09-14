@@ -2,7 +2,6 @@
 A copy of blur_1.py at the root of the assignment directory.
 '''
 import numpy as np
-import cv2
 
 
 def blur_image_numpy(image):
@@ -17,6 +16,9 @@ def blur_image_numpy(image):
     height, width, channels = image_.shape
     height -= 2
     width -= 2
+    assert np.all(np.array([height, width, channels]) > 0), \
+        'Negative dimensions of image array: {}'.format(
+                [height, width, channels])
     bimage = np.zeros([height, width, channels], dtype=np.float32)
 
     dh = [1, 1, 1, 0, 0, 0, -1, -1, -1]
