@@ -24,12 +24,12 @@ def blur_image(input_filename, output_filename=None):
 
 
 def blur_subsection(input_filename, subsections, output_filename=None):
-    '''Blur the an image in the given subsections.
+    '''Blur the image in the given subsections.
     Args:
         input_filename (string): Name of the file containing the image
                                  to be blurred.
-        subsections (list): A list of list-type objects of lenght 4 indicating
-                            the starting row and columna of the upper right
+        subsections (list): A list of list-type objects of length 4 indicating
+                            the starting row and column of the upper right
                             corner of the bounding box as well as the height
                             and width of the box.
         output_filename (string) [optional]: Name of the file to write the
