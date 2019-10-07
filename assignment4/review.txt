@@ -47,6 +47,8 @@ The package files themselves look fine to me, but I can't actually install
 the package. I don't know if this is due to my environment or whatever.
 I thought it might be that the folder with the package had the same name as the
 actual package, so I renamed it, but it still couldn't be installed.
+I looked over the tests and they seem correct to me, but I cannot actually run
+them since the package cannot be installed.
 
 4.7 blur_faces.py:
 Added a docstring explaining what the script does.
