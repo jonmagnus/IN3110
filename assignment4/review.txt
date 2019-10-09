@@ -51,11 +51,13 @@ I looked over the tests and they seem correct to me, but I cannot actually run
 them since the package cannot be installed.
 
 4.7 blur_faces.py:
+"subsections = [[r, c, h, w] for i in range(300) for c, r, w, h in faces]"
 Added a docstring explaining what the script does.
 This line was really hard to understand and it makes it so the script just
 blurs the faces 300 times which seems arbitrary to me so I changed it
 to simply stop when faces aren't detected any more.
-"subsections = [[r, c, h, w] for i in range(300) for c, r, w, h in faces]"
 This should also make the script work on arbitrary images, while
 blurring an image 300 times could potentially not be enough to make a face
 detector fail on another image.
+
+Overall, very solid stuff, everything just works. All changes from my side were just minor optimizations or nitpicking. Give yourself a pat on the back for this one.
