@@ -1,0 +1,9 @@
+"#.*(?:$|\n)": comment
+"(\S{1,})(?:\(.*\))": function
+"(?:from\s{1,}[a-zA-Z_\.]{1,}\s{1,})?import\s[a-zA-Z_\.]{1,}(?:\sas\s{1,}[a-zA-Z_\.]{1,})?": import
+"(?:\s)((?:None)|(?:False)|(?:True))(?:\s)": special
+"(?:\s)((?:try)|(?:except))(?:\s)": try_except
+"(?:\s)((?:if)|(?:elif)|(?:else))(?:\s)": if
+"(?:\s)(for)(?:\s)": for
+"(?:\s)(while)(?:\s)": while
+"\".*\"": string
