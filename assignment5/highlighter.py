@@ -47,14 +47,14 @@ if __name__ == '__main__':
     
     with open(args.sourcefile, 'r') as infile:
         lines = [l for l in infile]
-        #print(''.join(lines))
         line = ''.join(lines)
+        '''
         offset = 0
         while offset < len(line):
             #print('line',line)
             for regex in regtheme:
+                print('regex',regex)
                 match = re.match(regex,line[offset:])
-                #print('line',line,'regex',regex)
                 if match:
                     print('MATCH', match.group(0), match.groups(),syntax[regex])
                     g = 0
@@ -77,6 +77,28 @@ if __name__ == '__main__':
                     break
             #print('offset',offset)
             offset += 1
+        '''
 
-        print('--== line ==--')
+        is_used = [0]*len(line)
+        for regex in regtheme:
+            offset = 0
+            for match in re.finditer(regex,line):
+                g = 0
+                if match.groups():
+                    g = 1
+                if 1 in is_used[match.start(g):match.end(g)]:
+                    continue
+
+                new_line = line[:match.start(g) + offset] \
+                           + regtheme[regex] \
+                           + line[match.start(g) + offset:match.end(g) + offset] \
+                           + notheme \
+                           + line[match.end(g) + offset:]
+                len_diff = len(new_line) - len(line)
+                is_used = is_used[:match.start(g) + offset] \
+                          + [1]*len_diff \
+                          + is_used[match.end(g) + offset:]
+                offset += len_diff
+                line = new_line
+
         print(line)
