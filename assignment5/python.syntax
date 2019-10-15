@@ -1,9 +1,10 @@
 "#.*(?:$|\n)": comment
-"(\S{1,})(?:\(.*\))": function
-"(?:from\s{1,}[a-zA-Z_\.]{1,}\s{1,})?import\s[a-zA-Z_\.]{1,}(?:\sas\s{1,}[a-zA-Z_\.]{1,})?": import
+"(\w+)(?=\(.*\))": function
+"(?:from\s+[a-zA-Z_\.]+\s+)?import\s[a-zA-Z_\.]+(?:\sas\s+[a-zA-Z_\.]+)?": import
 "(?:\s)((?:None)|(?:False)|(?:True))(?:\s)": special
 "(?:\s)((?:try)|(?:except))(?:\s)": try_except
 "(?:\s)((?:if)|(?:elif)|(?:else))(?:\s)": if
 "(?:\s)(for)(?:\s)": for
 "(?:\s)(while)(?:\s)": while
-"\".*\"": string
+"(?s:[\"\']{3}.*?[\"\']{3})": string_block
+"[\"\'].*[\"\']": string
