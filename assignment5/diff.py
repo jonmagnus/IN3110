@@ -2,7 +2,6 @@
 Strategy:
     Find all matching lines first. It shouldn't be too difficult to match lines in a way that conserves the most amount of matched lines.
 '''
-''' A multiline on a single line'''
 import argparse
 import os
 
