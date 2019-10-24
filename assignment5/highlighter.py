@@ -35,6 +35,7 @@ def parse_arguments():
     return args
 
 def mark_syntax(line, syntax, priority={}):
+    theme = [syntax[regex] for regex in syntax]
     priority = {value: 0 if value not in priority else priority[value] \
         for value in theme}
     priority[None] = -1
@@ -47,7 +48,7 @@ def mark_syntax(line, syntax, priority={}):
             if match.groups():
                 groups = [i + 1 for i,_ in enumerate(match.groups())]
             for g in groups:
-                print('MATCH',value,line[match.start(g):match.end(g)],'in',line[match.start(0):match.end(0)])
+                #print('MATCH',value,line[match.start(g):match.end(g)],'in',line[match.start(0):match.end(0)])
                 for i in range(match.start(g),match.end(g)):
                     if priority[value] > priority[color[i]]:
                         color[i] = value
