@@ -26,12 +26,12 @@ if __name__ == '__main__':
     args = parse_arguments()
     notheme = '\033[0m'
     color = '\033[31m'
-    
+
     with open(args.sourcefile) as infile:
         for line in infile:
             match = re.search(args.regex,line)
             if match:
-                if args.highlight is not None:
+                if args.highlight:
                     line = line[:match.start(0)] \
                            + color \
                            + line[match.start(0):match.end(0)] \
