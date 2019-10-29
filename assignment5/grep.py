@@ -38,8 +38,6 @@ if __name__ == '__main__':
     colormap = {i: colors[i % len(colors)] for i,_ in enumerate(args.regex)}
     colormap = {**colormap, None: notheme}
 
-    print(args)
-    
     with open(args.sourcefile) as infile:
         for line in infile:
             line, coloring = mark_syntax(line, syntax)
