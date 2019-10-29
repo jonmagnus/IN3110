@@ -1,0 +1,10 @@
+comment: 0;31
+multiline_comment: 0;31
+compiler: 0;32
+type: 0;33
+function: 0;34
+string: 0;35
+char: 0;36
+library: 0;35
+return: 0;101
+struct: 0;102

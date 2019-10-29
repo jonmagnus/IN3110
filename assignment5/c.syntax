@@ -1,0 +1,10 @@
+"//.*(?:$|\n)": comment
+"(?s:/\*.*\*/)": comment
+"(?:^|\n)(#\w+)": compiler
+"(int)|(flaot)|(double)|(short)|(long)|(char)": type
+"(\w+\s*)\(.*\)": function
+"\".*?\"": string
+"\'.\'": char
+"<[\w\.]*?>": library
+"(?:^|\s)(return)\s+": return
+"(?:^|\s)(struct)\s+": struct
