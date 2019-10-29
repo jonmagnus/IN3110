@@ -83,9 +83,9 @@ if __name__ == '__main__':
         for line in infile:
             if line[0] == '#':
                 continue
-            if line[-1] == '\n':
-                line = line[:-1]
-            regex = eval(delim.join(line.split(delim)[:-1]))
+            line = line.strip()
+            regex = delim.join(line.split(delim)[:-1])
+            regex = regex.strip()[1:-1]
             value = line.split(delim)[-1]
             syntax[regex] = value
     

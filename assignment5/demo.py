@@ -11,15 +11,14 @@ def a(123):
     pass
 
 class some_class:
+    def __init__():
+        pass
 
 
 
-'''
-Strategy:
-    Find all matching lines first. It shouldn't be too difficult to match lines in a way that conserves the most amount of matched lines.
-'''
 import argparse
 import os
+from foo import bar
 
 def parse_arguments():
     parser = argparse.ArgumentParser(

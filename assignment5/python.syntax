@@ -1,6 +1,5 @@
 "#.*(?:$|\n)": comment
-#"(?:from\s+[a-zA-Z_\.]+\s+)?import\s[a-zA-Z_\.]+(?:\sas\s+[a-zA-Z_\.]+)?": import
-"(?:(from)(?:\w+\s+))?(import)(?:\s+)?": import
+"(?:(from)(?:\s+\w+\s+))?(import)(?:\s+)?": import
 "(?:\s)((?:None)|(?:False)|(?:True))(?:\s)": special
 "(?:\s)((?:try)|(?:except))(?:\s)": try_except
 "(?:\s)((?:if)|(?:elif)|(?:else))(?:\s)": if
@@ -8,7 +7,7 @@
 "(?:\s)(while)(?:\s)": while
 "(?s:[\"\']{3}.*?[\"\']{3})": string_block
 "(?<!\\\\)[\"\'].*?[^\\\\][\"\']": string
-"(?:\s|^)(class)(?:\s+\w+\s*?\:)?": class_1
-"(?:\s|^)(?:class\s+)(\w+)": class_2
+"(?:\s|^)(class)\s": class_1
+"(?:\s|^)class\s+(\w+)": class_2
 "(?:\s|^)?(def)(?:\s+\w+)": def
 "(\w+)(?=\(.*\))": function
