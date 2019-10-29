@@ -35,6 +35,15 @@ def parse_arguments():
     return args
 
 def mark_syntax(line, syntax, priority={}):
+    '''
+    Mark the line with a 'color' corresponding to the label of the regex the character
+    was match with.
+    Args:
+        line (string): The string that should be marked with colors.
+        syntax (dict): The mapping from regex to label.
+        priority (dict): The map from the regexs to an integer value indicating
+            the priority of the label in case of multiple matches on the same substring.
+    '''
     theme = [syntax[regex] for regex in syntax]
     priority = {value: 0 if value not in priority else priority[value] \
         for value in theme}
@@ -48,19 +57,27 @@ def mark_syntax(line, syntax, priority={}):
             if match.groups():
                 groups = [i + 1 for i,_ in enumerate(match.groups())]
             for g in groups:
-                #print('MATCH',value,line[match.start(g):match.end(g)],'in',line[match.start(0):match.end(0)])
                 for i in range(match.start(g),match.end(g)):
+                    # Color if the current label has higher priority than what's already colored.
                     if priority[value] > priority[color[i]]:
                         color[i] = value
     
     return line, color
 
 def color_line(line, color, colormap):
+    '''
+    Inserts color tags into the string as specified by the coloring and the color map.
+    Args:
+        line (string): The colored line that should be inserted with tags.
+        color (list): The coloring of the string.
+        colormap (dict): The map from the labels to the color tags to insert.
+    '''
     pre_value = None
     offset = 0
     for i,value in enumerate(color):
         if value == pre_value:
             continue
+        # Insert color tag if the coloring changes.
         new_line = line[:i + offset] + colormap[value] + line[i + offset:]
         offset += len(colormap[value])
         line = new_line
@@ -78,6 +95,7 @@ if __name__ == '__main__':
             'string_block': 4
             }
 
+    # Parse the syntax file
     syntax = {}
     with open(args.syntaxfile, 'r') as infile:
         for line in infile:
@@ -89,6 +107,7 @@ if __name__ == '__main__':
             value = line.split(delim)[-1]
             syntax[regex] = value
     
+    # Parse the theme file
     theme = {}
     with open(args.themefile, 'r') as infile:
         for line in infile:

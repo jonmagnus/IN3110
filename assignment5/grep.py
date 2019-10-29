@@ -25,6 +25,7 @@ def parse_arguments():
     return args
 
 def not_colored(coloring):
+    ''' Check if any of the characters in the line is colored. '''
     for c in coloring:
         if c is not None:
             return False
@@ -33,6 +34,7 @@ def not_colored(coloring):
 if __name__ == '__main__':
     args = parse_arguments()
     notheme = '\033[0m'
+    # Generate a list of colors to iterate through
     colors = [f'\033[{i}m' for i in range(31,51)]
     syntax = {regex: i for i,regex in enumerate(args.regex)}
     colormap = {i: colors[i % len(colors)] for i,_ in enumerate(args.regex)}
