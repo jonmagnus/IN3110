@@ -5,13 +5,14 @@ import numpy as np
 def test_blur_image_reduced_max():
     '''Test if blurring decreases the maximum intensity.'''
     np.random.seed(1)
-    image = np.random.randint(0, 255, size=[480, 640, 3], dtype=np.uint8)
+    imgsize = [480, 640, 3]
+    image = np.random.randint(0, 255, size=imgsize, dtype=np.uint8)
     bimage = imgblur.blur_methods.blur_image_numpy(image[...])
     assert image.max() > bimage.max(), 'Maximum intensity did not decrease.'
 
 
 def test_blur_is_average():
-    '''Test if the value of each inner pixel is the average
+    '''Test if the value of each inner pixel is the average of
     the values in the surrounding pixels.
     '''
     np.random.seed(1)
