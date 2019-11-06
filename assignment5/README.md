@@ -1,6 +1,6 @@
 # Assignment 5
 
-Assignment 5 consist of a syntax highlighting script, with highlighting opportunities for python, java and diff. It also have an implementation of grep and diff.
+Assignment 5 consist of a syntax highlighting script, with highlighting opportunities for python, C and diff. It also have an implementation of grep and diff.
 
 # Usage
 
@@ -24,6 +24,8 @@ python3 highlighter.py diff.syntax diff.theme diff_output.txt
 ```
 
 # Installation
+
+To use the diff you need numpy
 
 ```bash
 pip3 install numpy
