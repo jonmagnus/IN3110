@@ -1,0 +1,81 @@
++ # A comment
+- # A comment and some extra text that was inserted
+0 # A comment with some other syntax in: for i in range def function()
+0 
+0 import matplotlib.pyplot as plt
+0 from a import b as c
+0 
+0 if False or True is not None:
+0     print(Some fancy stuff)
++ 
++ def a(123):
++     pass
+0 
+- # We are going to remove some lines after this
+0 class some_class:
+0     def __init__():
+0         pass
++ 
++ 
++ 
+0 import argparse
+0 import os
++ from foo import bar
+0 
+0 def parse_arguments():
+0     parser = argparse.ArgumentParser(
+0             description='A diff clone implemented in python.')
+0     parser.add_argument(
+0             'sourcefile',
+0             type=str,
+0             help='The first file to compare.')
+0     parser.add_argument(
+0             'otherfile',
+0             type=str,
+0             help='The second file to compare.')
+0     args = parser.parse_args()
+0     assert os.path.exists(args.sourcefile), 'There is no sourcefile at \'{args.sourcefile}\'.'
+0     assert os.path.exists(args.otherfile), 'There is no otherfile at \'{args.otherfile}\'.'
+0     return args
+0 
+0 def print_diff(c, lines_1, lines_2, i, j):
+0     if i > 0 and j > 0 and lines_1[i] == lines_2[j]:
+0         print_diff(c, lines_1, lines_2, i - 1, j - 1)
+0         print('0', lines_1[i], end='')
+0     elif j > 0 and (i == 0 or c[i][j - 1] >= c[i - 1][j]):
+0         print_diff(c, lines_1, lines_2, i, j - 1)
+0         print('-', lines_2[j], end='')
+0     elif i > 0 and (j == 0 or c[i][j - 1] < c[i - 1][j]):
+0         print_diff(c, lines_1, lines_2, i - 1, j)
+0         print('+', lines_1[i], end='')
+- 
+- # Let's change some lines in the following method...
+0 
+0 if __name__ == '__main__':
++     args = parse_arguments()
++     with open(args.sourcefile, 'r') as infile:
++         lines_1 = [l for l in infile]
+-     args = parse_arguments() # A comment
+-     with open(args.sourcefile, 'r') as infile: # Another comment
+-         lines_1 = [l for l in infile] # A third comment (how many can he make!?)
+0 
+0     with open(args.otherfile, 'r') as infile:
+0         lines_2 = [l for l in infile]
+0 
+0     n = len(lines_1)
+0     m = len(lines_2)
+0 
+0     lines_1 = [0] + lines_1
+0     lines_2 = [0] + lines_2
+0 
+0     # Solve the longest common subsequence problem.
+0     c = [[0]*(m + 1)]*(n + 1)
+0     for i in range(1, n + 1):
++         for j in range(1, m + 1):
+-         for j in range(1, m + 1): # A fourth comment (mind = blown)
+0             if lines_1[i] == lines_2[j]:
+0                 c[i][j] = c[i - 1][j - 1] + 1
+0             else:
+0                 c[i][j] = max(c[i][j - 1], c[i - 1][j])
+0     
+0     print_diff(c, lines_1, lines_2, n, m)

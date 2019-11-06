@@ -22,7 +22,7 @@ def parse_arguments():
     assert os.path.exists(args.otherfile), 'There is no otherfile at \'{args.otherfile}\'.'
     return args
 
-def print_diff(c, lines_1, lines_2, i, j):
+def print_diff(c, lines_1, lines_2, i, j, outfile):
     '''
     Prints the lines of the file recursively with a sign corresponding to if it was inserted,
     deleted or exists in the longest common subsequence.
@@ -35,16 +35,16 @@ def print_diff(c, lines_1, lines_2, i, j):
     '''
     # The lines are the same, so we matched them earlier.
     if i > 0 and j > 0 and lines_1[i] == lines_2[j]:
-        print_diff(c, lines_1, lines_2, i - 1, j - 1)
-        print('0', lines_1[i], end='')
+        print_diff(c, lines_1, lines_2, i - 1, j - 1, outfile)
+        outfile.write('0 '+ lines_1[i])
     # Iterating on the second file leads us down the optimal path.
     elif j > 0 and (i == 0 or c[i,j - 1] >= c[i - 1][j]):
-        print_diff(c, lines_1, lines_2, i, j - 1)
-        print('-', lines_2[j], end='')
+        print_diff(c, lines_1, lines_2, i, j - 1, outfile)
+        outfile.write('- '+ lines_2[j])
     # Iterating on the first file leads us down the optimal path.
     elif i > 0 and (j == 0 or c[i,j - 1] < c[i - 1][j]):
-        print_diff(c, lines_1, lines_2, i - 1, j)
-        print('+', lines_1[i], end='')
+        print_diff(c, lines_1, lines_2, i - 1, j, outfile)
+        outfile.write('+ ' + lines_1[i])
 
 if __name__ == '__main__':
     args = parse_arguments()
@@ -77,5 +77,9 @@ if __name__ == '__main__':
                 c[i,j] = c[i - 1,j - 1] + 1
             else:
                 c[i,j] = max(c[i,j - 1], c[i - 1,j])
-    
-    print_diff(c, lines_1, lines_2, n, m)
+
+    outfile = open("diff_output.txt", "w+")
+
+    print_diff(c, lines_1, lines_2, n, m, outfile)
+
+    outfile.close()

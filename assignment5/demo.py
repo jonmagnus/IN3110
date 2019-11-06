@@ -14,6 +14,13 @@ class some_class:
     def __init__():
         pass
 
+    def la_oss_prove_try_except():
+
+        try:
+            open(file)
+        except FileNotFoundError:
+            print(ups)
+
 
 
 import argparse
@@ -69,5 +76,5 @@ if __name__ == '__main__':
                 c[i][j] = c[i - 1][j - 1] + 1
             else:
                 c[i][j] = max(c[i][j - 1], c[i - 1][j])
-    
+
     print_diff(c, lines_1, lines_2, n, m)

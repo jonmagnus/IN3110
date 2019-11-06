@@ -1,7 +1,7 @@
 "#.*(?:$|\n)": comment
-"(?:(from)(?:\s+\w+\s+))?(import)(?:\s+)?": import
-"(?:\s)((?:None)|(?:False)|(?:True))(?:\s)": special
-"(?:\s)((?:try)|(?:except))(?:\s)": try_except
+"(?:(from)(?:\s+[\w\.]+\s+))?(import)\s[\w\.]+(\s\bas\b\s)?": import
+"(?:\s)((?:None)|(?:False)|(?:True))(?:(?:\s)|(?::))": special
+"(\btry\b)\s*:|(\bexcept\b)(?:\s)": try_except
 "(?:\s)((?:if)|(?:elif)|(?:else))(?:\s)": if
 "(?:\s)(for)(?:\s)": for
 "(?:\s)(while)(?:\s)": while
