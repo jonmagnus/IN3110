@@ -7,7 +7,7 @@ import: 0;35
 special: 0;36
 string_block: 0;31
 string: 0;33
-try_except: 0;38
+try_except: 0;96
 if: 0;39
 for: 0;40
 while: 0;40
