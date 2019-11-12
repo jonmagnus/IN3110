@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+from sklearn.model_selection import train_test_split
 
 def get_table():
     filename = 'diabetes.csv'
@@ -12,6 +13,11 @@ def get_table():
     table.dropna(inplace=True)
     return table
 
+def get_split_table(test_size=.2):
+    table = get_table()
+    train_table, test_table = train_test_split(table, test_size=test_size)
+    return train_table, test_table
+
 def get_numerical_columns(table):
     columns = table.drop(['diabetes'], axis=1).columns
     return columns
@@ -21,7 +27,7 @@ def plot_with_columns(table, col1, col2, **kwargs):
     '''
     for col in [col1, col2]:
         assert type
-    colors = table['diabetes'].apply(lambda val: 'r' if val == 'pos' else 'b')
+    colors = table['diabetes'].apply(lambda val: 'b' if val == 'pos' else 'r')
     return table.plot.scatter(x=col1, y=col2, c=colors, **kwargs)
 
 def plot_all_matches(table, columns, **kwargs):
