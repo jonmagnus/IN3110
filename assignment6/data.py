@@ -18,6 +18,15 @@ def get_split_table(test_size=.2):
     train_table, test_table = train_test_split(table, test_size=test_size)
     return train_table, test_table
 
+def get_labels(*args):
+    label_list = []
+    for table in args:
+        labels = table[['diabetes']].copy()
+        labels['diabetes'] = labels['diabetes'].apply(lambda val: 1 if val == 'pos' else 0)
+        label_list.append(labels)
+    return label_list
+        
+
 def get_numerical_columns(table):
     columns = table.drop(['diabetes'], axis=1).columns
     return columns

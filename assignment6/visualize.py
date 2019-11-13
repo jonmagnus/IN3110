@@ -40,10 +40,12 @@ def visualize_confidence(classifier, table, col1, col2, ax=None, **kwargs):
     return ax
 
 if __name__=='__main__':
-    from data import get_split_table
+    from data import get_split_table, get_labels
     from fitting import fit
     train_table, test_table = get_split_table()
+    train_labels, test_labels = get_labels(train_table, test_table)
     feature_set = ['pregnant', 'glucose']
     classifier = fit('svc', feature_set, train_table)
     visualize_confidence(classifier, train_table, *feature_set)
+    print(f'Test score {classifier.score(test_table[feature_set], test_labels)}')
     plt.show()
