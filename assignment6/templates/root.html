@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Graphs</title>
+	</head>
+	<body>
+		<!--div style='text-algin:center;'-->
+		<h1>Header</h1>
+		{% if classifier %}
+		<img src='image.svg?classifier={{ classifier }}'/>
+		{% endif %}
+		{% if classifier %}
+		<table>
+			<tr>
+				<th></th>
+				<th>Trian</th>
+				<th>Test</th>
+			</tr>
+			<tr>
+				<th>Score</th>
+				<th>{{ train_score }}</th>
+				<th>{{ test_score }}</th>
+			</tr>
+		</table>
+		{% endif %}
+
+		<form method='POST' action='render_image'>
+			<select name='classifier'>
+				<option value='kneighbor'>K Nearest Neighbor</option>
+				<option value='svc'>SVC</option>
+			</select>
+			<br>
+			<input type='submit' value='Submit'/>
+		</form>
+		<!--/div-->
+	</body>
+</html>

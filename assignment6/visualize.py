@@ -1,8 +1,11 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import os
 
 from data import plot_with_columns
+from data import get_split_table, get_labels
+from fitting import fit
 
 def visualize_confidence(classifier, table, col1, col2, ax=None, **kwargs):
     if ax is None:
@@ -39,9 +42,26 @@ def visualize_confidence(classifier, table, col1, col2, ax=None, **kwargs):
     ax.set_ylim(y_min, y_max)
     return ax
 
+def handle_image_generation(
+        classifier,
+        feature_set=['pregnant', 'glucose'], 
+        imagepath=os.path.join(os.getcwd(), 'resources', 'image.svg'),
+        ):
+    train_table, test_table = get_split_table()
+    train_labels, test_labels = get_labels(train_table, test_table)
+    classifier = fit(classifier, feature_set, train_table)
+    if (len(feature_set) == 2):
+        visualize_confidence(classifier, train_table, *feature_set)
+        plt.savefig(imagepath)
+        print(f'Save image file at \'{imagepath}\'')
+    #train_score = classifier.score(train_table, train_labels)
+    #test_score = classifier.score(test_table, test_labels)
+    train_score = 0
+    test_score = 0
+    return train_score, test_score
+
+
 if __name__=='__main__':
-    from data import get_split_table, get_labels
-    from fitting import fit
     train_table, test_table = get_split_table()
     train_labels, test_labels = get_labels(train_table, test_table)
     feature_set = ['pregnant', 'glucose']
