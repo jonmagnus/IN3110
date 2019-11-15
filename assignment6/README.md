@@ -16,6 +16,7 @@ $ python3 visualize.py
 Trains a random classifier on two random features and produces a contour map for the classifier with the datapoints shown.
 
 ```
+$ sh generate_docs.sh
 $ python3 web_visualization.py
  * Serving Flask app "web_visualization" (lazy loading)
  * Environment: production
@@ -30,3 +31,4 @@ $ python3 web_visualization.py
 Starts a flask web-server.
 Access the website through your browser with at the address `localhost:5000`.
 Debugging on the server is set to be active.
+Remember to run `generate_docs.sh` first to generate the html documents for the documentation.
