@@ -4,16 +4,20 @@
 		<title>Graphs</title>
 	</head>
 	<body>
-		<!--div style='text-algin:center;'-->
-		<h1>Header</h1>
-		{% if classifier %}
-		<img src='image.svg?classifier={{ classifier }}'/>
+		<h1>Machine Learning for Diabetes</h1>
+		<p>
+		Select a classifier below and check the features you want to classify by.
+		If you choose only two features you will recieve a visaulizaiton of the prediction.
+		</p>
+		{% if visualizable %}
+		<!-- Send timestamp to force update on image -->
+		<img src='image.svg?time={{ timestamp }}'/>
 		{% endif %}
-		{% if classifier %}
-		<table>
+		{% if train_score and test_score %}
+		<table border='1px solid black'>
 			<tr>
 				<th></th>
-				<th>Trian</th>
+				<th>Train</th>
 				<th>Test</th>
 			</tr>
 			<tr>
@@ -26,12 +30,32 @@
 
 		<form method='POST' action='render_image'>
 			<select name='classifier'>
-				<option value='kneighbor'>K Nearest Neighbor</option>
-				<option value='svc'>SVC</option>
+				{% for classifier_name in classifier_options %}
+				<option 
+					value='{{ classifier_name }}'
+					{% if classifier_name == classifier %}
+					selected
+					{% endif %}
+				>
+					{{ classifier_name }}
+				</option>
+				{% endfor %}
 			</select>
+			<br>
+			{% for feature_name in feature_options %}
+			<input
+				type='checkbox' 
+				name='feature_set'
+				value='{{ feature_name }}'
+				{% if feature_name in feature_set %}
+				checked
+				{% endif %}
+			>
+				{{ feature_name }}
+			</input><br>
+			{% endfor %}
 			<br>
 			<input type='submit' value='Submit'/>
 		</form>
-		<!--/div-->
 	</body>
 </html>

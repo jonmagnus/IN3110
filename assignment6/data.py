@@ -4,6 +4,8 @@ import os
 from sklearn.model_selection import train_test_split
 
 def get_table():
+    ''' Return the diabetes table as a pandas dataframe.
+    '''
     filename = 'diabetes.csv'
     filedir = os.path.dirname(os.path.abspath(__file__))
     filepath = os.path.join(filedir, filename)
@@ -27,17 +29,20 @@ def get_labels(*args):
     return label_list
         
 
-def get_numerical_columns(table):
+def get_numerical_columns(table = get_table()):
     columns = table.drop(['diabetes'], axis=1).columns
     return columns
 
 def plot_with_columns(table, col1, col2, **kwargs):
     ''' Generate a scatter plot from two columns of a table.
     '''
-    for col in [col1, col2]:
-        assert type
-    colors = table['diabetes'].apply(lambda val: 'b' if val == 'pos' else 'r')
-    return table.plot.scatter(x=col1, y=col2, c=colors, **kwargs)
+    c1 = kwargs.get('c1', 'b')
+    c2 = kwargs.get('c2', 'r')
+    
+    colors = table['diabetes'].apply(lambda val: c1 if val == 'pos' else c2)
+    kwargs_filter = ['marker', 'vmin', 'vmax', 'label', 'ax']
+    f_kwargs = {key: kwargs.get(key) for key in kwargs_filter if key in kwargs}
+    return table.plot.scatter(x=col1, y=col2, c=colors, **f_kwargs)
 
 def plot_all_matches(table, columns, **kwargs):
     ''' Generate a grid of plots similar to a correlation matrix.

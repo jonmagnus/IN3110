@@ -20,7 +20,7 @@ classifier_map = {
 def fit(classifier, feature_set, train_table):
     ''' Train a classifier on the specified feature set.
     '''
-    if type(classifier) == str:
+    if isinstance(classifier, str):
         if classifier not in classifier_map.keys():
             raise ValueError(f'No classifier with name \'{classifier}\'')
         classifier = classifier_map[classifier]
