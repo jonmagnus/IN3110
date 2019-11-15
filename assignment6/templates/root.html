@@ -4,11 +4,23 @@
 		<title>Graphs</title>
 	</head>
 	<body>
+		{% if error %}
+		<p style='color:red'>{{ error }}</p>
+		{% endif %}
 		<h1>Machine Learning for Diabetes</h1>
 		<p>
 		Select a classifier below and check the features you want to classify by.
 		If you choose only two features you will recieve a visaulizaiton of the prediction.
 		</p>
+		<h2>Python documentation</h2>
+		<ul>
+			<li><a href='data.html'>data.py</a></li>
+			<li><a href='fitting.html'>fitting.py</a></li>
+			<li><a href='visualize.html'>visualize.py</a></li>
+		</ul>
+		
+		<br>
+		
 		{% if visualizable %}
 		<!-- Send timestamp to force update on image -->
 		<img src='image.svg?time={{ timestamp }}'/>

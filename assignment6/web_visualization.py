@@ -4,9 +4,13 @@ from visualize import handle_image_generation
 from fitting import classifier_map
 from data import get_numerical_columns 
 import time
+import pydoc
 
 template_folder = os.path.join(os.getcwd(), 'templates')
 assert os.path.exists(template_folder), f'Missing template folder \'{template_folder}\''
+documentation_folder = os.path.join(template_folder, 'documentation')
+assert os.path.exists(documentation_folder), f'Missing documentation folder \'{documentation_folder}\'. ' + \
+        'Did you remember to run \'generate_docs.sh\'?'
 app = Flask(__name__, template_folder=template_folder)
 
 # Specify global image path to avoid sending around adresses
@@ -40,13 +44,20 @@ def render_image():
     feature_options = get_feature_options()
     
     feature_set = request.form.getlist('feature_set')
-
-    train_score, test_score = handle_image_generation(
-            classifier,
-            imagepath=imagepath,
-            feature_set=feature_set,
-            title='Train score {train_score:.5f} Test score {test_score:.5f}',
-            )
+    if len(feature_set):
+        train_score, test_score = handle_image_generation(
+                classifier,
+                imagepath=imagepath,
+                feature_set=feature_set,
+                title='Train score {train_score:.5f} Test score {test_score:.5f}',
+                )
+        kwargs = {
+            'train_score': f'{train_score:.5f}',
+            'test_score': f'{test_score:.5f}',
+            'visualizable': len(feature_set) == 2,
+            }
+    else:
+        kwargs = {'error': 'Must use at least one feature for prediction.'}
     
     classifier_options = get_classifier_options()
     return render_template(
@@ -56,15 +67,25 @@ def render_image():
             feature_options=feature_options,
             feature_set=feature_set,
             timestamp=time.time(),
-            visualizable=len(feature_set) == 2,
-            train_score=f'{train_score:.5f}',
-            test_score=f'{test_score:.5f}',
+            **kwargs
             )
 
 
 @app.route('/image.svg', methods=['GET'])
 def generate_image():
     return send_file(imagepath, mimetype='image/svg+xml')
+
+@app.route('/data.html')
+def data():
+    return render_template(os.path.join('documentation','data.html'))
+
+@app.route('/visualize.html')
+def visualize():
+    return render_template(os.path.join('documentation','visualize.html'))
+
+@app.route('/fitting.html')
+def fitting():
+    return render_template(os.path.join('documentation','fitting.html'))
 
 if __name__=='__main__':
     app.run(debug=True)
